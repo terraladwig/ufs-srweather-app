@@ -96,8 +96,17 @@ fi
 #------------------------------------
 $Build_gsi && {
 echo " .... GSI build not currently supported .... "
-#echo " .... Building gsi .... "
-#./build_gsi.sh > $logs_dir/build_gsi.log 2>&1
+echo " .... Building gsi .... "
+./build_gsi.sh > $logs_dir/build_gsi.log 2>&1
+}
+
+#------------------------------------
+# build rrfs_utl
+#------------------------------------
+$Build_rrfs_utl && {
+echo " .... rrsf_utl build not currently supported .... "
+echo " .... Building rrfs_utl .... "
+./build_rrfs_utl.sh > $logs_dir/build_rrfs_utl.log 2>&1
 }
 
 echo;echo " .... Build system finished .... "

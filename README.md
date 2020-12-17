@@ -1,4 +1,4 @@
-# UFS Short-Range Weather Application for GSL dev1
+# UFS Short-Range Weather Application for GSL dev2
 
 The UFS Short-Range Weather Application (UFS SR Wx App) provides an end-to-end system to run
 pre-processing tasks, the regional UFS Weather Model, and the Unified Post Processor (UPP). 
@@ -9,7 +9,7 @@ For the most up-to-date instructions on how to clone the repository, build the c
 https://github.com/ufs-community/ufs-srweather-app/wiki/Getting-Started
 
 
-# Modifications for the RRFS_dev1
+# Modifications for the RRFS_dev2
 
 This branch supports additional features for running real-time RRFS runs
 at GSL on Jet. The branch's default configuration has not been tested on
@@ -24,6 +24,7 @@ This branch supports the following features:
  - Additional grib2 files
  - FV3_HRRR physics (workflow components enabled)
  - A different vertical configuration -- L65_20mb
+ - cycling and data assimilation
 
 # Repo Directory Structure
 
@@ -81,9 +82,9 @@ Building need be done only once if no source code is changed.
 
 - Clone the ufs-srweather-app repository.
 ```
-    git clone https://github.com/NOAA-GSD/ufs-srweather-app.git gsd-srweather-app
+    git clone https://github.com/NOAA-GSL/ufs-srweather-app.git gsd-srweather-app
     cd gsd-srweather-app
-    git checkout feature/RRFS_dev1
+    git checkout feature/RRFS_dev2
 ```
 - And retrieve the externals.
 
@@ -107,8 +108,10 @@ below will fail verbosely if this step has been skipped.
     cd regional_workflow
     mkdir fix
     cd fix
-    ln -sf /mnt/lfs4/BMC/nrtrr/RRFS/fix/fix_am.20201001 fix_am
+    ln -sf /mnt/lfs4/BMC/nrtrr/RRFS/fix/fix_am.20201001  fix_am
     ln -sf /mnt/lfs4/BMC/nrtrr/RRFS/fix/fix_lam.20201001 fix_lam
+    ln -sf /home/rtrr/FIX_EXEC_MODULE/crtm/CRTM_v2.3.0   fix_crtm
+    ln -sf /mnt/lfs4/BMC/nrtrr/RRFS/fix/fix_gsi          fix_gsi
 
 ### Configuring
 
@@ -128,11 +131,11 @@ to be updated consistently with each other:
 > identical names set in the Rocoto XML.
 
 #### User-specific settings
-Before running the RRFS_dev1 configuration, you will need to change your
+Before running the RRFS_dev2 configuration, you will need to change your
 output directories by editing the config file:
 
     cd regional_workflow/ush
-    vi config.sh.RRFS_dev1
+    vi config.sh.RRFS_dev2
 
 Inside the config file, ensure that you are point to your preferred user
 space for the following variables:
@@ -149,7 +152,7 @@ You will also likely want to change the dates over which to run:
 
 The configure script should then be linked to the expected name:
 
-    ln -sf config.sh.RRFS_dev1 config.sh
+    ln -sf config.sh.RRFS_dev2 config.sh
 
 
 #### Retro runs
@@ -190,7 +193,7 @@ directory that contains the XML, namelists, etc.
 
 ### Load the conda environment:
 
-    module use -a /contrib3/miniconda3/modulefiles
+    module use -a /contrib/miniconda3/modulefiles
     module load miniconda3
     conda activate regional_workflow
 
@@ -212,7 +215,7 @@ Tutorial](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-wo
 for more information.
 
 All development should be done in a branch of your personal fork, then
-contributed back to the feature/RRFS_dev1 branch through a Pull Request
+contributed back to the feature/RRFS_dev2 branch through a Pull Request
 on GitHub.
 
 ## Pull Requests
