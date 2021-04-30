@@ -89,4 +89,14 @@ cmake ${MYDIR}/src/rrfs_utl -DCMAKE_INSTALL_PREFIX=.
 make -j ${BUILD_JOBS:-4}
 cp ./bin/* ${MYDIR}/bin/.
 
+#building bufr sounding codes
+# this could be made optional
+cd ${MYDIR}/src/bufr_sounding
+./build_bufr.sh
+./build_sndp.sh
+./build_stnmlist.sh
+cp ${MYDIR}/src/bufr_sounding/regional_bufr.fd/regional_bufr.x ${MYDIR}/bin/.
+cp ${MYDIR}/src/bufr_sounding/regional_sndp.fd/regional_sndp.x ${MYDIR}/bin/.
+cp ${MYDIR}/src/bufr_sounding/regional_stnmlist.fd/regional_stnmlist.x ${MYDIR}/bin/.
+
 exit 0
